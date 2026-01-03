@@ -1,8 +1,23 @@
 services:
+  app:
+      build: .
+      environment:
+        MONGO_URI: mongodb://mongo:27017
+        MONGO_DB: willhaben
+        MONGO_COLLECTION: immobilien
+      depends_on:
+        mongo:
+          condition: service_healthy
+      command: ["python", "main.py"]
   mongo:
-    image: mongo:7
+    image: mongo:8.0
     ports: ["27017:27017"]
     volumes: ["mongo_data:/data/db"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "mongodb://localhost:27017/test", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4

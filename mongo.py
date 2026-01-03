@@ -8,7 +8,7 @@ from pymongo import MongoClient, UpdateOne
 #   mongodb://localhost:27017
 # Wenn du das Script als Container im selben docker-compose Netzwerk laufen lässt:
 #   mongodb://mongo:27017
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongo:27017")
 DB_NAME = os.getenv("MONGO_DB", "willhaben")
 COLL_NAME = os.getenv("MONGO_COLLECTION", "immobilien")
 
