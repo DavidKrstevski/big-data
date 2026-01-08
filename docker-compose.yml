@@ -3,7 +3,7 @@ services:
       build: .
       environment:
         MONGO_URI: mongodb://mongo:27017
-        MONGO_DB: willhaben
+        #MONGO_DB: willhaben
         MONGO_COLLECTION: immobilien
       depends_on:
         mongo:

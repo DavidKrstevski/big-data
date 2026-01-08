@@ -12,9 +12,9 @@ MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongo:27017")
 DB_NAME = os.getenv("MONGO_DB", "willhaben")
 COLL_NAME = os.getenv("MONGO_COLLECTION", "immobilien")
 
-def get_collection():
+def get_collection(database):
     client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-    db = client[DB_NAME]
+    db = client[os.getenv("MONGO_DB", database)]
     col = db[COLL_NAME]
 
     # Unique per Listing (damit du nicht doppelt speicherst)
@@ -25,11 +25,11 @@ def get_collection():
 
     return col
 
-def save_items_to_mongo(items: list[dict]) -> dict:
+def save_items_to_mongo(items: list[dict], database: str) -> dict:
     if not items:
         return {"matched": 0, "upserted": 0, "modified": 0}
 
-    col = get_collection()
+    col = get_collection(database)
     now = datetime.now(timezone.utc)
 
     ops = []
