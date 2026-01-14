@@ -19,7 +19,7 @@ def parse_list_page(html: str) -> list[str]:
     soup = BeautifulSoup(html, "lxml")
 
     links = []
-    for a in soup.select('a[href^="https://www.immowelt.at/expose/"]'):
+    for a in soup.select('a[href^="https://www.immowelt.at/projekte/expose/"]'):
         links.append(urljoin(SITE, a["href"]))
 
     # dedupe, Reihenfolge behalten
