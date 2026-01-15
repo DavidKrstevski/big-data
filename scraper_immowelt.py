@@ -244,4 +244,4 @@ if __name__ == "__main__":
     items = scrape_pages(pages=1)
     print(f"Scraped {len(items)} items")
     if items:
-        print(items[0])
+        print(items)

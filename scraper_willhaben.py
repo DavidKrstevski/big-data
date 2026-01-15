@@ -108,7 +108,7 @@ def parse_detail_page(html: str, url: str) -> dict:
 def scrape_pages(pages: int = 2) -> list[dict]:
     all_items = []
     seen = set()
-
+    counter = 0
     for page in range(1, pages + 1):
         list_url = f"{BASE}?page={page}"
         list_html = fetch(list_url)
@@ -122,7 +122,8 @@ def scrape_pages(pages: int = 2) -> list[dict]:
             detail_html = fetch(durl)
             item = parse_detail_page(detail_html, durl)
             all_items.append(item)
-
+        counter = counter + 1
+        print(f"Scraped pages: {counter}")
     return all_items
 
 if __name__ == "__main__":
